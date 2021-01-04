@@ -1,8 +1,9 @@
-from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
 html = urlopen("https://sports.news.naver.com/wfootball/index.nhn")
-resp = html.get(url)
+soup = BeautifulSoup(html, "html.parser")
 
-resp
-
+for link in soup.find_all('a'):
+    print(link.text.strip(), link.get('href'))
